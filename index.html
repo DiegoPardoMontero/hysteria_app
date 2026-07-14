@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hysteria Coffee Roasters · Café de especialidad</title>
+<style>
+  /* ── BRAND FONTS ─────────────────────────────── */
+  @font-face {
+    font-family: 'Neuton';
+    src: url('assets/fonts/Neuton-Regular.ttf') format('truetype');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Neuton';
+    src: url('assets/fonts/Neuton-Bold.ttf') format('truetype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Geosans Light';
+    src: url('assets/fonts/GeosansLight.ttf') format('truetype');
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Geosans Light';
+    src: url('assets/fonts/GeosansLight-Oblique.ttf') format('truetype');
+    font-weight: 300; font-style: italic; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto-Light.ttf') format('truewtype');
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: 'Roboto';
+    src: url('assets/fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black:   #000000;
+    --page:    #000000;
+    --card:    #0A0A0A;
+    --white:   #FFFFFF;
+    --cream:   #FFFFFF;
+    --gray:    #757575;
+    --mist:    rgba(255,255,255,0.45);
+    --border:  rgba(255,255,255,0.12);
+
+    --pasion:  #E42320;
+    --ilusion: #A11AD3;
+    --deseo:   #0068FF;
+
+    /* swapped per active collection */
+    --accent:  #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--page);
+    color: var(--white);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    padding-top: 72px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ─────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3rem; height: 72px;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none; color: var(--white);
+  }
+  .nav-logo img { height: 40px; width: auto; display: block; }
+  .nav-logo-text {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--white);
+  }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--white); border: 1px solid var(--white);
+    background: transparent; padding: 9px 22px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-cta:hover { background: var(--white); color: var(--black); }
+
+  /* ── HERO ────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 3rem 5rem;
+    position: relative; overflow: hidden;
+    background: var(--black);
+  }
+  .hero-watermark {
+    position: absolute; top: 50%; right: -4%; transform: translateY(-50%);
+    width: clamp(360px, 55vw, 720px);
+    opacity: 0.08; pointer-events: none;
+    user-select: none;
+  }
+  .hero-noise {
+    position: absolute; inset: 0; opacity: 0.18;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+  .hero-eyebrow {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 2rem; position: relative;
+    opacity: 0.85;
+  }
+  .hero-title {
+    font-family: 'Neuton', serif;
+    font-size: clamp(2.8rem, 6.5vw, 5.8rem);
+    font-weight: 400; font-style: italic;
+    line-height: 1.05; color: var(--white);
+    max-width: 920px; position: relative;
+    letter-spacing: -0.01em;
+  }
+  .hero-title-quote { display: block; }
+  .hero-attrib {
+    font-family: 'Neuton', serif;
+    font-style: normal; font-weight: 400;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    color: var(--white); opacity: 0.55;
+    margin-top: 1.6rem; letter-spacing: 0.1em;
+    position: relative;
+  }
+  .hero-body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px; line-height: 1.85;
+    color: rgba(255,255,255,0.6);
+    max-width: 480px; margin-top: 2.4rem;
+    position: relative;
+  }
+  .hero-actions { display: flex; gap: 1rem; margin-top: 3rem; position: relative; flex-wrap: wrap; }
+  .btn-solid {
+    background: var(--white); color: var(--black);
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 14px 32px; border: 1px solid var(--white);
+    cursor: pointer; font-weight: 300;
+    transition: opacity 0.2s;
+  }
+  .btn-solid:hover { opacity: 0.85; }
+  .btn-ghost {
+    background: transparent; color: var(--white);
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 14px 32px; border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--white); }
+  .hero-scroll {
+    position: absolute; right: 3rem; bottom: 4rem;
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); writing-mode: vertical-rl;
+  }
+
+  /* ── SHARED ──────────────────────────────────── */
+  section { padding: 7rem 3rem; }
+  .sec-tag {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 12px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+  .sec-title {
+    font-family: 'Neuton', serif;
+    font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+    font-weight: 400; line-height: 1.1;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+  .sec-body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px; line-height: 1.85;
+    color: rgba(255,255,255,0.6);
+    max-width: 560px; margin-top: 1.4rem;
+  }
+  .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+  /* ── ESENCIA (Misión / Visión) ───────────────── */
+  .esencia { background: var(--black); position: relative; overflow: hidden; }
+  .esencia-intro {
+    max-width: 880px; margin: 0 auto 4rem; text-align: center;
+  }
+  .esencia-intro .sec-title { margin-top: 0.8rem; }
+  .esencia-intro p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px; line-height: 1.85;
+    color: rgba(255,255,255,0.65);
+    margin-top: 1.6rem;
+  }
+  .esencia-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    max-width: 1100px; margin: 0 auto;
+    border: 1px solid var(--border);
+  }
+  .esencia-card {
+    background: var(--card);
+    padding: 3rem 2.4rem;
+  }
+  .esencia-card h3 {
+    font-family: 'Neuton', serif;
+    font-style: italic; font-weight: 400;
+    font-size: 2rem; color: var(--white);
+    margin-bottom: 1.6rem;
+  }
+  .esencia-card p {
+    font-family: 'Roboto', sans-serif; font-weight: 300;
+    font-size: 15px; line-height: 1.8;
+    color: rgba(255,255,255,0.68);
+  }
+
+  /* ── COLLECTION ─────────────────────────────── */
+  .collection { background: var(--black); padding: 6rem 0; position: relative; overflow: hidden; }
+  .collection-header { padding: 0 3rem; margin-bottom: 1.5rem; position: relative; z-index: 2; }
+  .collection-watermark {
+    position: absolute; right: -6%; top: 8%;
+    width: clamp(420px, 50vw, 700px);
+    pointer-events: none; user-select: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+  }
+  .collection-watermark.show { opacity: 0.55; }
+
+  .collection-filter {
+    display: flex; gap: 0; margin-top: 2.4rem;
+    border-bottom: 1px solid var(--border);
+    padding: 0 3rem;
+    position: relative; z-index: 2;
+  }
+  .cfilt {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    padding: 12px 22px; border: none; background: transparent;
+    cursor: pointer; color: rgba(255,255,255,0.4);
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .cfilt.on { color: var(--accent); border-bottom-color: var(--accent); }
+  .cfilt:hover { color: var(--white); }
+
+  .collection-track-wrap {
+    overflow-x: auto;
+    padding: 2.5rem 3rem 1rem;
+    scrollbar-width: none;
+    position: relative; z-index: 2;
+  }
+  .collection-track-wrap::-webkit-scrollbar { display: none; }
+  .collection-track {
+    display: flex; gap: 1.5rem;
+    width: max-content;
+  }
+
+  .ccard {
+    width: 240px; flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .ccard:hover { transform: translateY(-6px); }
+
+  .ccard-img {
+    height: 320px;
+    background-color: #0A0A0A;
+    background-size: cover; background-position: center;
+    position: relative; overflow: hidden;
+    display: flex; align-items: flex-end; padding: 1.2rem;
+    border: 1px solid var(--border);
+  }
+  .ccard-img::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.15) 55%);
+    transition: opacity 0.3s;
+  }
+  .ccard:hover .ccard-img::before { opacity: 0.75; }
+
+  .ccard-dot {
+    position: absolute; top: 12px; left: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--card-color, var(--white));
+    z-index: 2;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.4);
+  }
+  .ccard-weight {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); position: relative; z-index: 1;
+  }
+  .ccard-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--card-color, var(--white));
+    color: var(--black);
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 4px 9px; font-weight: 300;
+    z-index: 2;
+  }
+
+  .ccard-info { padding: 1.1rem 0.4rem 0; }
+  .ccard-origin {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--card-color, var(--white));
+  }
+  .ccard-name {
+    font-family: 'Neuton', serif;
+    font-size: 1.15rem; margin-top: 6px; color: var(--white);
+    font-weight: 400;
+  }
+  .ccard-notes {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    margin-top: 5px; line-height: 1.55;
+  }
+  .ccard-price {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; color: var(--white); font-weight: 400;
+    margin-top: 0.9rem;
+  }
+
+  .collection-hint {
+    padding: 0 3rem;
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 0.8rem;
+    position: relative; z-index: 2;
+  }
+  .collection-hint::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: rgba(255,255,255,0.25);
+  }
+
+  /* ── MENU ────────────────────────────────────── */
+  .menu { background: var(--page); }
+  .menu-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.4rem; margin-bottom: 2.5rem; }
+  .menu-tabs {
+    display: flex; gap: 0; border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+    max-width: 100%;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+  .mtab {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    padding: 12px 22px; border: none; background: transparent;
+    cursor: pointer; color: rgba(255,255,255,0.4);
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .mtab.on { color: var(--white); border-bottom-color: var(--white); }
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px; background: var(--border); margin-top: 2.5rem;
+    border: 1px solid var(--border);
+  }
+  .menu-item { background: var(--card); padding: 1.8rem; }
+  .menu-item-name {
+    font-family: 'Neuton', serif;
+    font-size: 1.15rem; font-weight: 400; color: var(--white);
+  }
+  .menu-item-desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    margin-top: 6px; line-height: 1.65;
+  }
+  .menu-item-price {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px; color: var(--white);
+    margin-top: 1rem; font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .menu-note {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    margin-top: 1.4rem; letter-spacing: 0.02em;
+    line-height: 1.7;
+  }
+
+  /* ── NUESTROS CAFÉS · MATRIZ ──────────────────── */
+  .cafes-matrix {
+    margin-top: 5rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    padding: 3rem 2.4rem;
+  }
+  .cafes-matrix-header { margin-bottom: 2rem; }
+  .cafes-matrix-title {
+    font-family: 'Neuton', serif;
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    font-weight: 400; font-style: italic;
+    color: var(--white); margin-top: 0.8rem;
+  }
+  .cafes-matrix-sub {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; color: rgba(255,255,255,0.55);
+    margin-top: 0.6rem; line-height: 1.7; max-width: 520px;
+  }
+  .cafes-table { display: flex; flex-direction: column; }
+  .cafes-row {
+    display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 1.1rem 0;
+    border-bottom: 1px dotted rgba(255,255,255,0.18);
+    gap: 0.6rem;
+  }
+  .cafes-row:last-child { border-bottom: none; }
+  .cafes-row-head {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+  .cafes-col {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase;
+    text-align: center; font-weight: 400;
+  }
+  .cafes-label {
+    font-family: 'Neuton', serif; font-style: italic;
+    font-size: 1.05rem; color: var(--white);
+  }
+  .cafes-cell {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; color: rgba(255,255,255,0.85);
+    text-align: center; font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 640px) {
+    .cafes-matrix { padding: 2rem 1.2rem; margin-top: 3rem; }
+    .cafes-row { grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 0.4rem; padding: 0.9rem 0; }
+    .cafes-col { font-size: 10px; letter-spacing: 0.18em; }
+    .cafes-label { font-size: 0.95rem; }
+    .cafes-cell { font-size: 12px; }
+  }
+
+  /* ── SHOP ────────────────────────────────────── */
+  .shop { background: var(--card); }
+  .shop-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .shop-card {
+    border: 1px solid var(--border);
+    background: var(--black);
+  }
+  .shop-img {
+    height: 260px;
+    background-color: #0A0A0A;
+    background-size: cover; background-position: center;
+    display: flex; align-items: flex-end;
+    padding: 1.2rem; position: relative; overflow: hidden;
+  }
+  .shop-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.1) 60%);
+  }
+  .shop-dot {
+    position: absolute; top: 14px; left: 14px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--card-color, var(--white));
+    z-index: 2;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.4);
+  }
+  .shop-badge {
+    position: absolute; top: 14px; right: 14px;
+    background: var(--white); color: var(--black);
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 4px 10px; font-weight: 300;
+    z-index: 2;
+  }
+  .shop-weight {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); position: relative; z-index: 1;
+  }
+  .shop-info { padding: 1.4rem; }
+  .shop-origin {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--card-color, var(--white));
+    margin-bottom: 6px;
+  }
+  .shop-name {
+    font-family: 'Neuton', serif;
+    font-size: 1.1rem; color: var(--white); font-weight: 400;
+  }
+  .shop-notes {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    margin-top: 6px; line-height: 1.55;
+  }
+  .shop-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid var(--border);
+  }
+  .shop-price {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; font-weight: 500; color: var(--white);
+  }
+  .shop-btn {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--white); padding: 8px 14px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .shop-btn:hover { background: var(--white); border-color: var(--white); color: var(--black); }
+
+  /* ── NEWSLETTER (inverted) ───────────────────── */
+  .newsletter {
+    padding: 5rem 3rem;
+    background: var(--white);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 2rem;
+  }
+  .newsletter-title {
+    font-family: 'Neuton', serif;
+    font-size: 1.9rem; color: var(--black); font-weight: 400;
+    font-style: italic;
+  }
+  .newsletter-sub {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; color: rgba(0,0,0,0.6);
+    margin-top: 8px; line-height: 1.6;
+  }
+  .newsletter-form { display: flex; gap: 0; flex: 1; max-width: 440px; }
+  .nl-input {
+    flex: 1; background: transparent; border: 1px solid rgba(0,0,0,0.25);
+    color: var(--black); font-size: 14px; padding: 13px 16px;
+    outline: none; font-family: 'Roboto', sans-serif;
+  }
+  .nl-input::placeholder { color: rgba(0,0,0,0.4); }
+  .nl-btn {
+    background: var(--black); color: var(--white);
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+    padding: 13px 22px; border: none; cursor: pointer;
+    white-space: nowrap; font-weight: 300;
+  }
+
+  /* ── VISIT ───────────────────────────────────── */
+  .visit { background: var(--page); }
+  .visit-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .visit-card {
+    border: 1px solid var(--border); padding: 2.5rem;
+    position: relative; overflow: hidden;
+    background: var(--card);
+  }
+  .visit-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 2px; height: 100%;
+    background: var(--white);
+  }
+  .visit-tag {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+  .visit-name {
+    font-family: 'Neuton', serif;
+    font-size: 1.4rem; margin-bottom: 1rem;
+    color: var(--white); font-weight: 400;
+  }
+  .visit-detail {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.75;
+  }
+  .visit-hours {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.85;
+    margin-top: 1.3rem; padding-top: 1.3rem;
+    border-top: 1px solid var(--border);
+  }
+  .visit-hours b { color: var(--white); font-weight: 500; }
+
+  /* ── FOOTER ──────────────────────────────────── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 4rem 3rem 2.5rem;
+    display: grid; grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 3rem;
+  }
+  .footer-brand-mark { margin-bottom: 1.2rem; }
+  .footer-brand-mark img { height: 120px; width: auto; display: block; }
+  .footer-tagline {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.85;
+  }
+  .footer-col-title {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 1.2rem;
+    opacity: 0.85;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer-links a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--border);
+    padding-top: 1.6rem; margin-top: 1.4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy {
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.04em;
+  }
+  .footer-social { display: flex; gap: 1.6rem; }
+  .footer-social a {
+    font-family: 'Geosans Light', sans-serif;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--white); }
+
+  /* ── RESPONSIVE ──────────────────────────────── */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.2rem; }
+    .nav-links { display: none; }
+    .nav-logo-text { display: none; }
+    section { padding: 4.5rem 1.5rem; }
+    .hero { padding: 0 1.5rem 4rem; }
+    .hero-scroll { display: none; }
+    .hero-watermark { right: -25%; opacity: 0.06; width: 90vw; }
+    .esencia-grid { grid-template-columns: 1fr; }
+    .visit-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem 2rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .newsletter { padding: 3rem 1.5rem; }
+    .newsletter-form { max-width: 100%; width: 100%; }
+    .divider { margin: 0 1.5rem; }
+    .collection-header { padding: 0 1.5rem; }
+    .collection-filter { padding: 0 1.5rem; overflow-x: auto; }
+    .collection-track-wrap { padding: 2rem 1.5rem 1rem; }
+    .collection-hint { padding: 0 1.5rem; }
+    .collection-watermark { opacity: 0; }
+    .collection-watermark.show { opacity: 0.28; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────── -->
+<nav>
+  <a href="#top" class="nav-logo">
+    <img src="assets/logo/icono-hummingbird-white.png" alt="Hysteria">
+    <span class="nav-logo-text">Hysteria · Coffee Roasters</span>
+  </a>
+  <div class="nav-links">
+    <a href="#esencia">Esencia</a>
+    <a href="#collection">Colecciones</a>
+    <a href="#menu">Menú</a>
+    <a href="#shop">Tienda</a>
+    <a href="#visit">Visítanos</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Ordenar Café</button>
+</nav>
+
+<!-- ── HERO ───────────────────────────── -->
+<section class="hero" id="top">
+  <img class="hero-watermark" src="assets/logo/icono-hummingbird-white.png" alt="">
+  <div class="hero-noise"></div>
+  <div class="hero-eyebrow">Bogotá · Café de Especialidad · Est. 2021</div>
+  <h1 class="hero-title">
+    <span class="hero-title-quote">"El café es ese tipo de magia</span>
+    <span class="hero-title-quote">que te puedes tomar."</span>
+  </h1>
+  <div class="hero-attrib">— Cmv</div>
+  <p class="hero-body">
+    Somos la unión de un sinfín de emociones, sentimientos y sensaciones que nos produce el café. Te traemos los mejores cafés colombianos de diferentes orígenes, variedades y procesos.
+  </p>
+  <div class="hero-actions">
+    <button class="btn-solid" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">Explorar Colecciones</button>
+    <button class="btn-ghost" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Ver el Menú</button>
+  </div>
+  <span class="hero-scroll">Desliza</span>
+</section>
+
+<!-- ── ESENCIA ───────────────────────── -->
+<section class="esencia" id="esencia">
+  <div class="esencia-intro">
+    <div class="sec-tag">Nuestra Esencia</div>
+    <h2 class="sec-title">Pasión por el café colombiano</h2>
+    <p>
+      Queremos transmitir toda esa pasión y amor brindando los mejores cafés colombianos de diferentes orígenes, variedades y procesos, siempre resaltando y respetando el trabajo que hay detrás de un café especial.
+    </p>
+  </div>
+  <div class="esencia-grid">
+    <div class="esencia-card">
+      <h3>Misión</h3>
+      <p>
+        Ser una empresa influyente en el desarrollo del mercado del café de especialidad, generando cultura, conciencia e impacto al buen consumo a través de un estilo moderno y diferente, contribuyendo a la identidad y sentido de pertinencia de un producto tan nuestro como el café colombiano.
+      </p>
+    </div>
+    <div class="esencia-card">
+      <h3>Visión</h3>
+      <p>
+        Lograr un posicionamiento en el mercado de café especializado, llegando a muchos sectores sociales y siendo uno de los principales referentes de calidad y servicio, ofreciendo distintos tipos de experiencias y perfiles trabajando siempre bajo un trato directo y precio justo con el caficultor.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── COLLECTION ─────────────────────── -->
+<section class="collection" id="collection">
+  <img id="collection-watermark" class="collection-watermark" src="" alt="">
+
+  <div class="collection-header">
+    <div class="sec-tag">Las Colecciones</div>
+    <h2 class="sec-title">Pasión, Ilusión y Deseo</h2>
+    <p class="sec-body">Tres colecciones, tres emociones. Cada una reúne micro-lotes colombianos seleccionados a mano y tostados en casa para resaltar lo que la finca tiene para contar.</p>
+  </div>
+
+  <div class="collection-filter">
+    <button class="cfilt on" onclick="filterCollection('all', this)">Todas</button>
+    <button class="cfilt" onclick="filterCollection('pasion', this)">Pasión</button>
+    <button class="cfilt" onclick="filterCollection('ilusion', this)">Ilusión</button>
+    <button class="cfilt" onclick="filterCollection('deseo', this)">Deseo</button>
+  </div>
+
+  <div class="collection-track-wrap">
+    <div class="collection-track" id="collection-track">
+
+      <!-- PASIÓN -->
+      <div class="ccard" data-collection="pasion" style="--card-color: var(--pasion)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-badge">Nuevo</span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Pasión · Huila</div>
+          <div class="ccard-name">El Paraíso Natural</div>
+          <div class="ccard-notes">Arándano · chocolate oscuro · cardamomo</div>
+          <div class="ccard-price">$52.000</div>
+        </div>
+      </div>
+
+      <div class="ccard" data-collection="pasion" style="--card-color: var(--pasion)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-badge">Nuevo</span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Pasión · Nariño</div>
+          <div class="ccard-name">Pink Bourbon Anaeróbico</div>
+          <div class="ccard-notes">Fresa · rosa · final de hibisco</div>
+          <div class="ccard-price">$64.000</div>
+        </div>
+      </div>
+
+      <div class="ccard" data-collection="pasion" style="--card-color: var(--pasion)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Pasión · Tolima</div>
+          <div class="ccard-name">Caturra Natural</div>
+          <div class="ccard-notes">Frutos rojos · melaza · cuerpo completo</div>
+          <div class="ccard-price">$54.000</div>
+        </div>
+      </div>
+
+      <div class="ccard" data-collection="pasion" style="--card-color: var(--pasion)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-badge">Edición Limitada</span>
+          <span class="ccard-weight" style="position:relative;z-index:1">100g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Pasión · Huila</div>
+          <div class="ccard-name">Geisha La Palma</div>
+          <div class="ccard-notes">Bergamota · flores blancas · sensación a té</div>
+          <div class="ccard-price">$88.000</div>
+        </div>
+      </div>
+
+      <!-- ILUSIÓN -->
+      <div class="ccard" data-collection="ilusion" style="--card-color: var(--ilusion)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1497935586047-9395ee065e52?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Ilusión · Nariño</div>
+          <div class="ccard-name">La Llorona Lavado</div>
+          <div class="ccard-notes">Durazno · jazmín · final acaramelado</div>
+          <div class="ccard-price">$48.000</div>
+        </div>
+      </div>
+
+      <div class="ccard" data-collection="ilusion" style="--card-color: var(--ilusion)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1541167760496-1628856ab772?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Ilusión · Cauca</div>
+          <div class="ccard-name">Villa María Lavado</div>
+          <div class="ccard-notes">Ralladura de limón · panela · final nítido</div>
+          <div class="ccard-price">$47.000</div>
+        </div>
+      </div>
+
+      <div class="ccard" data-collection="ilusion" style="--card-color: var(--ilusion)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=85&auto=format&fit=crop&crop=center')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Ilusión · Valle del Cauca</div>
+          <div class="ccard-name">San Agustín Honey</div>
+          <div class="ccard-notes">Albaricoque · toffee · textura sedosa</div>
+          <div class="ccard-price">$51.000</div>
+        </div>
+      </div>
+
+      <!-- DESEO -->
+      <div class="ccard" data-collection="deseo" style="--card-color: var(--deseo)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-badge">Más vendido</span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Deseo · Antioquia</div>
+          <div class="ccard-name">Hysteria House Blend</div>
+          <div class="ccard-notes">Azúcar moreno · fruta de hueso · cuerpo suave</div>
+          <div class="ccard-price">$44.000</div>
+        </div>
+      </div>
+
+      <div class="ccard" data-collection="deseo" style="--card-color: var(--deseo)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1511537190424-bbbab87ac5eb?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Deseo · Antioquia</div>
+          <div class="ccard-name">Finca El Progreso</div>
+          <div class="ccard-notes">Nuez · cereza oscura · final prolongado</div>
+          <div class="ccard-price">$46.000</div>
+        </div>
+      </div>
+
+      <div class="ccard" data-collection="deseo" style="--card-color: var(--deseo)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Deseo · Cauca</div>
+          <div class="ccard-name">El Cedro Honey</div>
+          <div class="ccard-notes">Mango · vainilla · dulzor a miel</div>
+          <div class="ccard-price">$50.000</div>
+        </div>
+      </div>
+
+      <div class="ccard" data-collection="deseo" style="--card-color: var(--deseo)">
+        <div class="ccard-img" style="background-image: url('https://images.unsplash.com/photo-1507133750040-4a8f57021571?w=500&q=85&auto=format&fit=crop')">
+          <span class="ccard-dot"></span>
+          <span class="ccard-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+        </div>
+        <div class="ccard-info">
+          <div class="ccard-origin">Deseo · Tolima</div>
+          <div class="ccard-name">La Esperanza Lavado</div>
+          <div class="ccard-notes">Cítricos · manzana verde · brillo limpio</div>
+          <div class="ccard-price">$49.000</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="collection-hint">Desliza para explorar</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── MENU ───────────────────────────── -->
+<section class="menu" id="menu">
+  <div class="menu-header">
+    <div>
+      <div class="sec-tag">Menú</div>
+      <h2 class="sec-title">Preparado con precisión</h2>
+    </div>
+    <div class="menu-tabs">
+      <button class="mtab on" onclick="switchTab('classic',this)">Clásicos</button>
+      <button class="mtab" onclick="switchTab('iced',this)">Iced</button>
+      <button class="mtab" onclick="switchTab('notcoffee',this)">Not Coffee</button>
+      <button class="mtab" onclick="switchTab('sodas',this)">Sodas</button>
+      <button class="mtab" onclick="switchTab('pasteleria',this)">Pastelería</button>
+    </div>
+  </div>
+
+  <!-- CLÁSICOS -->
+  <div id="tab-classic" class="menu-grid">
+    <div class="menu-item">
+      <div class="menu-item-name">Espresso</div>
+      <div class="menu-item-desc">Doble shot, extracción cerrada</div>
+      <div class="menu-item-price">$6.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Long Black</div>
+      <div class="menu-item-desc">Doble shot sobre agua caliente</div>
+      <div class="menu-item-price">$6.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Cappuccino · Latte</div>
+      <div class="menu-item-desc">Espresso con leche vaporizada y micro-espuma</div>
+      <div class="menu-item-price">$8.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Flat White</div>
+      <div class="menu-item-desc">Doble ristretto, micro-espuma sedosa</div>
+      <div class="menu-item-price">$8.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Mokka</div>
+      <div class="menu-item-desc">Espresso, chocolate y leche vaporizada</div>
+      <div class="menu-item-price">$9.500</div>
+    </div>
+  </div>
+
+  <!-- ICED -->
+  <div id="tab-iced" class="menu-grid" style="display:none">
+    <div class="menu-item">
+      <div class="menu-item-name">Cold Brew</div>
+      <div class="menu-item-desc">Inmersión lenta, servido sobre hielo</div>
+      <div class="menu-item-price">$9.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Iced Latte</div>
+      <div class="menu-item-desc">Espresso, leche fría y hielo</div>
+      <div class="menu-item-price">$9.500</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Iced Mokka</div>
+      <div class="menu-item-desc">Espresso, chocolate, leche y hielo</div>
+      <div class="menu-item-price">$10.500</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Lemon Coffee</div>
+      <div class="menu-item-desc">Espresso con cítrico fresco — refrescante</div>
+      <div class="menu-item-price">$10.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Sparkling Coffee</div>
+      <div class="menu-item-desc">Espresso con agua con gas y notas cítricas</div>
+      <div class="menu-item-price">$15.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Iced Golden</div>
+      <div class="menu-item-desc">Golden milk frío — cúrcuma y especias</div>
+      <div class="menu-item-price">$15.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Iced Chai</div>
+      <div class="menu-item-desc">Chai especiado servido sobre hielo</div>
+      <div class="menu-item-price">$15.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Iced Tea</div>
+      <div class="menu-item-desc">Té frío de la casa</div>
+      <div class="menu-item-price">$15.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Infusión Fría</div>
+      <div class="menu-item-desc">Infusión de hierbas servida sobre hielo</div>
+      <div class="menu-item-price">$13.000</div>
+    </div>
+  </div>
+
+  <!-- NOT COFFEE -->
+  <div id="tab-notcoffee" class="menu-grid" style="display:none">
+    <div class="menu-item">
+      <div class="menu-item-name">Chocolate</div>
+      <div class="menu-item-desc">Chocolate caliente, cremoso y aterciopelado</div>
+      <div class="menu-item-price">$8.500</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Golden Milk</div>
+      <div class="menu-item-desc">Cúrcuma, jengibre y especias en leche tibia</div>
+      <div class="menu-item-price">$8.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Infusión</div>
+      <div class="menu-item-desc">Hierbas seleccionadas, infusionadas en caliente</div>
+      <div class="menu-item-price">$8.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Chai</div>
+      <div class="menu-item-desc">Té negro especiado con leche vaporizada</div>
+      <div class="menu-item-price">$8.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Té</div>
+      <div class="menu-item-desc">Selección de variedades de la casa</div>
+      <div class="menu-item-price">$8.500</div>
+    </div>
+  </div>
+
+  <!-- SODAS -->
+  <div id="tab-sodas" class="menu-grid" style="display:none">
+    <div class="menu-item">
+      <div class="menu-item-name">Pepino · Hierbabuena</div>
+      <div class="menu-item-desc">Soda artesanal refrescante y herbal</div>
+      <div class="menu-item-price">$12.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Sandía · Fresa · Romero</div>
+      <div class="menu-item-desc">Soda frutal con un toque aromático</div>
+      <div class="menu-item-price">$12.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Toronja · Frambuesa · Albahaca</div>
+      <div class="menu-item-desc">Cítrica, floral y con final limpio</div>
+      <div class="menu-item-price">$12.000</div>
+    </div>
+  </div>
+
+  <!-- PASTELERÍA -->
+  <div id="tab-pasteleria" class="menu-grid" style="display:none">
+    <div class="menu-item">
+      <div class="menu-item-name">Arepa de yuca y queso</div>
+      <div class="menu-item-desc">Tradición colombiana, recién hecha</div>
+      <div class="menu-item-price">$5.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Croissant de Chocolate</div>
+      <div class="menu-item-desc">Masa laminada con relleno de chocolate</div>
+      <div class="menu-item-price">$8.500</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Hysteria Cookies</div>
+      <div class="menu-item-desc">Galleta de la casa, receta propia</div>
+      <div class="menu-item-price">$9.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Croissant de Mantequilla</div>
+      <div class="menu-item-desc">Fermentación en frío, mantequilla europea</div>
+      <div class="menu-item-price">$10.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Croissant de Almendra</div>
+      <div class="menu-item-desc">Frangipane y almendras laminadas</div>
+      <div class="menu-item-price">$10.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Arepa de choclo</div>
+      <div class="menu-item-desc">Maíz tierno, ligeramente dulce</div>
+      <div class="menu-item-price">$10.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Lemon Pie</div>
+      <div class="menu-item-desc">Crema de limón con merengue tostado</div>
+      <div class="menu-item-price">$14.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Torta ChocoBanano</div>
+      <div class="menu-item-desc">Chocolate y banano horneado</div>
+      <div class="menu-item-price">$10.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Torta Red Velvet</div>
+      <div class="menu-item-desc">Clásica con cobertura de cream cheese</div>
+      <div class="menu-item-price">$10.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Torta de Zanahoria</div>
+      <div class="menu-item-desc">Especiada, con nuez y cream cheese</div>
+      <div class="menu-item-price">$10.000</div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Almojábana</div>
+      <div class="menu-item-desc">Queso fresco horneado, tradicional</div>
+      <div class="menu-item-price">$10.000</div>
+    </div>
+  </div>
+
+  <!-- NUESTROS CAFÉS · MATRIZ DE PRECIOS -->
+  <div class="cafes-matrix">
+    <div class="cafes-matrix-header">
+      <div class="sec-tag" style="margin-bottom:0">Nuestros Cafés</div>
+      <div class="cafes-matrix-title">Pasión · Ilusión · Deseo</div>
+      <p class="cafes-matrix-sub">Tres colecciones disponibles en taza, par o bolsa para llevar a casa.</p>
+    </div>
+    <div class="cafes-table">
+      <div class="cafes-row cafes-row-head">
+        <div></div>
+        <div class="cafes-col" style="color: var(--pasion)">Pasión</div>
+        <div class="cafes-col" style="color: var(--ilusion)">Ilusión</div>
+        <div class="cafes-col" style="color: var(--deseo)">Deseo</div>
+      </div>
+      <div class="cafes-row">
+        <div class="cafes-label">Taza</div>
+        <div class="cafes-cell">$8.500</div>
+        <div class="cafes-cell">$10.500</div>
+        <div class="cafes-cell">$10.500</div>
+      </div>
+      <div class="cafes-row">
+        <div class="cafes-label">Par de tazas</div>
+        <div class="cafes-cell">$15.000</div>
+        <div class="cafes-cell">$18.000</div>
+        <div class="cafes-cell">$18.000</div>
+      </div>
+      <div class="cafes-row">
+        <div class="cafes-label">Bolsa 250g</div>
+        <div class="cafes-cell">$30.000</div>
+        <div class="cafes-cell">$46.000</div>
+        <div class="cafes-cell">$60.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── SHOP ───────────────────────────── -->
+<section class="shop" id="shop">
+  <div class="sec-tag">Tienda</div>
+  <h2 class="sec-title">Lleva el origen a casa</h2>
+  <p class="sec-body">Todos los granos tostados en casa. Comercio directo con fincas en Huila, Nariño, Antioquia y más. Enviamos a toda Colombia.</p>
+  <div class="shop-grid">
+    <div class="shop-card" style="--card-color: var(--pasion)">
+      <div class="shop-img" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=85&auto=format&fit=crop&crop=bottom')">
+        <span class="shop-dot"></span>
+        <span class="shop-badge">Nuevo</span>
+        <span class="shop-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+      </div>
+      <div class="shop-info">
+        <div class="shop-origin">Pasión · Huila</div>
+        <div class="shop-name">El Paraíso Natural</div>
+        <div class="shop-notes">Arándano · chocolate oscuro · cardamomo</div>
+        <div class="shop-footer">
+          <span class="shop-price">$52.000</span>
+          <button class="shop-btn">Agregar</button>
+        </div>
+      </div>
+    </div>
+    <div class="shop-card" style="--card-color: var(--ilusion)">
+      <div class="shop-img" style="background-image: url('https://images.unsplash.com/photo-1497935586047-9395ee065e52?w=600&q=85&auto=format&fit=crop')">
+        <span class="shop-dot"></span>
+        <span class="shop-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+      </div>
+      <div class="shop-info">
+        <div class="shop-origin">Ilusión · Nariño</div>
+        <div class="shop-name">La Llorona Lavado</div>
+        <div class="shop-notes">Durazno · jazmín · final acaramelado</div>
+        <div class="shop-footer">
+          <span class="shop-price">$48.000</span>
+          <button class="shop-btn">Agregar</button>
+        </div>
+      </div>
+    </div>
+    <div class="shop-card" style="--card-color: var(--deseo)">
+      <div class="shop-img" style="background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=85&auto=format&fit=crop')">
+        <span class="shop-dot"></span>
+        <span class="shop-badge">Más vendido</span>
+        <span class="shop-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+      </div>
+      <div class="shop-info">
+        <div class="shop-origin">Deseo · Antioquia</div>
+        <div class="shop-name">Hysteria House Blend</div>
+        <div class="shop-notes">Azúcar moreno · fruta de hueso · cuerpo suave</div>
+        <div class="shop-footer">
+          <span class="shop-price">$44.000</span>
+          <button class="shop-btn">Agregar</button>
+        </div>
+      </div>
+    </div>
+    <div class="shop-card" style="--card-color: var(--deseo)">
+      <div class="shop-img" style="background-image: url('https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&q=85&auto=format&fit=crop')">
+        <span class="shop-dot"></span>
+        <span class="shop-weight" style="position:relative;z-index:1">250g · Grano entero</span>
+      </div>
+      <div class="shop-info">
+        <div class="shop-origin">Deseo · Cauca</div>
+        <div class="shop-name">El Cedro Honey</div>
+        <div class="shop-notes">Mango · vainilla · dulzor a miel</div>
+        <div class="shop-footer">
+          <span class="shop-price">$50.000</span>
+          <button class="shop-btn">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NEWSLETTER ──────────────────────── -->
+<div class="newsletter">
+  <div class="newsletter-text">
+    <div class="newsletter-title">Tostados frescos, cada dos semanas.</div>
+    <p class="newsletter-sub">Suscríbete y te enviamos directamente. Cancela cuando quieras.</p>
+  </div>
+  <form class="newsletter-form" onsubmit="event.preventDefault()">
+    <input class="nl-input" type="email" placeholder="tu@correo.com" aria-label="Correo electrónico" required>
+    <button class="nl-btn" type="submit">Suscribirme</button>
+  </form>
+</div>
+
+<!-- ── VISIT ──────────────────────────── -->
+<section class="visit" id="visit">
+  <div class="sec-tag">Visítanos</div>
+  <h2 class="sec-title">Encuéntranos en Bogotá</h2>
+  <div class="visit-grid">
+    <div class="visit-card">
+      <div class="visit-tag">Principal · La Candelaria</div>
+      <div class="visit-name">Hysteria Candelaria</div>
+      <div class="visit-detail">Calle 12 #3-45, La Candelaria<br>Bogotá, Colombia</div>
+      <div class="visit-hours">
+        <b>Lun – Vie</b> &nbsp; 7:30 am – 8 pm<br>
+        <b>Sáb – Dom</b> &nbsp; 9 am – 9 pm
+      </div>
+    </div>
+    <div class="visit-card">
+      <div class="visit-tag">Sucursal · Chapinero</div>
+      <div class="visit-name">Hysteria Chapinero</div>
+      <div class="visit-detail">Carrera 7 #63-21, Chapinero Alto<br>Bogotá, Colombia</div>
+      <div class="visit-hours">
+        <b>Lun – Vie</b> &nbsp; 8 am – 7 pm<br>
+        <b>Sáb</b> &nbsp; 9 am – 6 pm<br>
+        <b>Dom</b> &nbsp; Cerrado
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────── -->
+<footer id="contact">
+  <div>
+    <div class="footer-brand-mark">
+      <img src="assets/logo/imagotipo-white.png" alt="Hysteria Coffee Roasters">
+    </div>
+    <p class="footer-tagline">
+      Café tostado con pasión.<br>
+      Comercio directo y precio justo con el caficultor.<br>
+      Bogotá, Colombia.
+    </p>
+  </div>
+  <div>
+    <div class="footer-col-title">Navegar</div>
+    <div class="footer-links">
+      <a href="#esencia">Esencia</a>
+      <a href="#collection">Colecciones</a>
+      <a href="#menu">Menú</a>
+      <a href="#shop">Tienda</a>
+      <a href="#visit">Visítanos</a>
+    </div>
+  </div>
+  <div>
+    <div class="footer-col-title">Contacto</div>
+    <div class="footer-links">
+      <a href="mailto:hola@hysteriacoffeeroasters.com">hola@hysteriacoffeeroasters.com</a>
+      <a href="tel:+573120000000">+57 312 000 0000</a>
+      <a href="#">@hysteriacoffeeroasters</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Hysteria Coffee Roasters · Bogotá, Colombia · Todos los derechos reservados</span>
+    <div class="footer-social">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── Menu tabs ─────────────────────── */
+  function switchTab(id, btn) {
+    document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.mtab').forEach(b => b.classList.remove('on'));
+    document.getElementById('tab-' + id).style.display = 'grid';
+    btn.classList.add('on');
+  }
+
+  /* ── Collection filter + accent + watermark swap ──── */
+  const COLLECTION_THEME = {
+    all:     { accent: '#FFFFFF', watermark: '' },
+    pasion:  { accent: '#E42320', watermark: 'assets/collections/pasion-lily.png' },
+    ilusion: { accent: '#A11AD3', watermark: 'assets/collections/ilusion-orchid.png' },
+    deseo:   { accent: '#0068FF', watermark: 'assets/collections/deseo-rose.png' }
+  };
+
+  function filterCollection(key, btn) {
+    if (btn.classList.contains('on')) return;
+    document.querySelectorAll('.cfilt').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+
+    const theme = COLLECTION_THEME[key] || COLLECTION_THEME.all;
+    document.documentElement.style.setProperty('--accent', theme.accent);
+
+    const wmark = document.getElementById('collection-watermark');
+    if (theme.watermark) {
+      wmark.src = theme.watermark;
+      wmark.classList.add('show');
+    } else {
+      wmark.classList.remove('show');
+    }
+
+    const track = document.getElementById('collection-track');
+    const wrap  = document.querySelector('.collection-track-wrap');
+
+    track.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+    track.style.opacity   = '0';
+    track.style.transform = 'translateY(8px)';
+
+    setTimeout(() => {
+      document.querySelectorAll('.ccard').forEach(card => {
+        const match = key === 'all' || card.dataset.collection === key;
+        card.style.display = match ? '' : 'none';
+      });
+      wrap.scrollLeft = 0;
+      requestAnimationFrame(() => {
+        track.style.opacity   = '1';
+        track.style.transform = 'translateY(0)';
+      });
+    }, 220);
+  }
+
+  /* ── Drag-to-scroll on collection track ─── */
+  const track = document.querySelector('.collection-track-wrap');
+  if (track) {
+    let isDown = false, startX, scrollLeft;
+    track.addEventListener('mousedown', e => {
+      isDown = true; track.style.cursor = 'grabbing';
+      startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft;
+    });
+    track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = ''; });
+    track.addEventListener('mouseup',    () => { isDown = false; track.style.cursor = ''; });
+    track.addEventListener('mousemove',  e => {
+      if (!isDown) return;
+      e.preventDefault();
+      track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX) * 1.2;
+    });
+  }
+</script>
+</body>
+</html>
